@@ -13,6 +13,32 @@ import Step3Blessing from './components/Step3Blessing';
 import Step4Pouring from './components/Step4Pouring';
 import Step5Response from './components/Step5Response';
 
+/* ─── rate-limit: 3 ครั้ง / 10 นาที ─── */
+const RATE_KEY = 'rodnam_timestamps';
+const RATE_MAX = 3;
+const RATE_WINDOW = 10 * 60 * 1000; // 10 นาที
+
+function checkRateLimit() {
+  const now = Date.now();
+  const raw = localStorage.getItem(RATE_KEY);
+  const stamps = raw ? JSON.parse(raw).filter((t) => now - t < RATE_WINDOW) : [];
+  if (stamps.length >= RATE_MAX) {
+    const oldest = Math.min(...stamps);
+    const waitMs = RATE_WINDOW - (now - oldest);
+    const waitMin = Math.ceil(waitMs / 60000);
+    return { allowed: false, waitMin };
+  }
+  return { allowed: true };
+}
+
+function recordUsage() {
+  const now = Date.now();
+  const raw = localStorage.getItem(RATE_KEY);
+  const stamps = raw ? JSON.parse(raw).filter((t) => now - t < RATE_WINDOW) : [];
+  stamps.push(now);
+  localStorage.setItem(RATE_KEY, JSON.stringify(stamps));
+}
+
 /* ─── data ─── */
 const bowls = [
   { id: 'silver', img: bowlSilverImg, label: 'ขันเงินสลักลาย', desc: 'ให้ความรู้สึกอ่อนช้อยแบบล้านนาแท้', color: 'from-gray-200 to-gray-400' },
@@ -116,7 +142,16 @@ export default function App() {
         {step === 3 && (
           <Step3Blessing
             blessings={blessings}
-            onSelect={(text) => { setSelectedBlessing(text); setStep(4); }}
+            onSelect={(text) => {
+              const rate = checkRateLimit();
+              if (!rate.allowed) {
+                alert(`คุณอวยพรครบ ${RATE_MAX} ครั้งแล้ว กรุณารออีก ${rate.waitMin} นาทีค่ะ 🙏`);
+                return;
+              }
+              recordUsage();
+              setSelectedBlessing(text);
+              setStep(4);
+            }}
           />
         )}
         {step === 4 && <Step4Pouring />}

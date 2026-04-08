@@ -17,7 +17,7 @@ export default function Step5Response({ nickname, selectedBlessing, onReset }) {
 
       {/* ── กล่องข้อความ (มือถือ: บนสุด / sm: ซ้ายกลางจอ) ── */}
       <div
-        className="z-10 px-3 pt-4 sm:pt-0 sm:w-96 shrink-0 sm:self-center sm:mr-4 transition-opacity duration-[5000ms] ease-in"
+        className="z-10 px-3 pt-4 sm:pt-0 sm:w-96 shrink-0 sm:self-center sm:mr-4 transition-opacity duration-[3000ms] ease-in"
         style={{ opacity: visible ? 1 : 0 }}
       >
         <div className="bg-white/95 backdrop-blur-md rounded-2xl rounded-br-none shadow-2xl p-4 sm:p-6 space-y-3">
@@ -52,7 +52,7 @@ export default function Step5Response({ nickname, selectedBlessing, onReset }) {
 
       {/* ── รูปนายก (มือถือ: ล่างสุดชิดขวา / sm: ขวากลางจอ) ── */}
       <div
-        className="mt-auto flex justify-end items-end sm:mt-0 pointer-events-none transition-opacity duration-[5000ms] ease-in delay-500"
+        className="mt-auto flex justify-end items-end sm:mt-0 pointer-events-none transition-opacity duration-[3000ms] ease-in delay-300"
         style={{ opacity: visible ? 1 : 0 }}
       >
         <img
