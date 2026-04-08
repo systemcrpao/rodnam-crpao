@@ -17,9 +17,8 @@ export default function Step5Response({ nickname, selectedBlessing, onReset }) {
 
       {/* ── กล่องข้อความ (มือถือ: บนสุด / sm: ซ้ายกลางจอ) ── */}
       <div
-        className={`z-10 px-3 pt-4 sm:pt-0 sm:w-96 shrink-0 sm:self-center sm:mr-4 transition-all duration-1000 ease-out ${
-          visible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
-        }`}
+        className="z-10 px-3 pt-4 sm:pt-0 sm:w-96 shrink-0 sm:self-center sm:mr-4 transition-opacity duration-[5000ms] ease-in"
+        style={{ opacity: visible ? 1 : 0 }}
       >
         <div className="bg-white/95 backdrop-blur-md rounded-2xl rounded-br-none shadow-2xl p-4 sm:p-6 space-y-3">
           <p className="text-gray-700 leading-loose text-xs sm:text-sm tracking-wide font-semibold">
@@ -53,9 +52,8 @@ export default function Step5Response({ nickname, selectedBlessing, onReset }) {
 
       {/* ── รูปนายก (มือถือ: ล่างสุดชิดขวา / sm: ขวากลางจอ) ── */}
       <div
-        className={`mt-auto flex justify-end items-end sm:mt-0 pointer-events-none transition-all duration-1000 delay-300 ease-out ${
-          visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
+        className="mt-auto flex justify-end items-end sm:mt-0 pointer-events-none transition-opacity duration-[5000ms] ease-in delay-500"
+        style={{ opacity: visible ? 1 : 0 }}
       >
         <img
           src={directorImg}

@@ -92,7 +92,7 @@ export default function App() {
           <p className="text-sm font-semibold text-white/50 leading-tight">
             องค์การบริหารส่วนจังหวัดเชียงราย
           </p>
-          <p className="text-[13px] text-white/60">รดน้ำดำหัวออนไลน์</p>
+          <p className="text-[13px] text-white/60">ระบบรดน้ำดำหัวออนไลน์</p>
         </div>
       </header>
 

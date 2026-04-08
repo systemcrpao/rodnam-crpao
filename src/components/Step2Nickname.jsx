@@ -29,7 +29,7 @@ export default function Step2Nickname({ bowl, nickname, setNickname, onNext }) {
           onClick={() => { if (nickname.trim()) onNext(); }}
           className="px-5 py-2.5 rounded-full bg-white text-teal-700 font-bold text-sm shadow-lg hover:bg-white/90 active:scale-95 transition-all shrink-0"
         >
-          🙏 ถัดไป
+           ถัดไป  
         </button>
       </div>
     </div>
