@@ -2,6 +2,10 @@ export default function Step1BowlSelect({ bowls, pastBlessings = [], onSelect })
   // map bowl id → image
   const bowlImgMap = Object.fromEntries(bowls.map((b) => [b.id, b.img]));
 
+  // เซ็นเซอร์ชื่อ PDPA: เกิน 8 ตัวอักษร → แสดง 8 ตัวแรก + ****
+  const censorName = (name) =>
+    name.length > 8 ? name.slice(0, 8) + '*'.repeat(name.length - 8) : name;
+
   // แบ่งข้อความเป็น 4 สาย
   const rows = [[], [], [], []];
   pastBlessings.forEach((b, i) => rows[i % 4].push(b));
@@ -27,7 +31,7 @@ export default function Step1BowlSelect({ bowls, pastBlessings = [], onSelect })
                       {bowlImgMap[b.bowl] ? (
                         <img src={bowlImgMap[b.bowl]} alt="" className="inline-block w-4 h-4 sm:w-5 sm:h-5 object-contain align-middle mr-1" />
                       ) : '🙏'}{' '}
-                      <span className="font-semibold">{b.nickname}</span>{' '}
+                      <span className="font-semibold">{censorName(b.nickname)}</span>{' '}
                       <span className="text-white/60">— {b.blessing}</span>
                     </span>
                   ))}
