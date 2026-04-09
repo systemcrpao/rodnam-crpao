@@ -10,7 +10,7 @@ export default function Step4Pouring() {
         <img
           src={pouringGif}
           alt="กำลังรดน้ำดำหัว"
-          className="w-96 sm:w-full object-contain drop-shadow-2xl"
+          className="w-full sm:w-full object-contain drop-shadow-2xl"
         />
       </div>
     </div>
