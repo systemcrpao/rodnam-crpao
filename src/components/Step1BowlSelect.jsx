@@ -2,9 +2,9 @@ export default function Step1BowlSelect({ bowls, pastBlessings = [], onSelect })
   // map bowl id → image
   const bowlImgMap = Object.fromEntries(bowls.map((b) => [b.id, b.img]));
 
-  // เซ็นเซอร์ชื่อ PDPA: เกิน 8 ตัวอักษร → แสดง 8 ตัวแรก + ****
+  // เซ็นเซอร์ชื่อ PDPA: เกิน 8 ตัวอักษร → แสดง 8 ตัวแรก + ***
   const censorName = (name) =>
-    name.length > 8 ? name.slice(0, 8) + '*'.repeat(name.length - 8) : name;
+    name.length > 8 ? name.slice(0, 8) + '***' : name;
 
   // แบ่งข้อความเป็น 4 สาย
   const rows = [[], [], [], []];
