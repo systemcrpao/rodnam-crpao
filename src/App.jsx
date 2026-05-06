@@ -12,6 +12,7 @@ import Step2Nickname from './components/Step2Nickname';
 import Step3Blessing from './components/Step3Blessing';
 import Step4Pouring from './components/Step4Pouring';
 import Step5Response from './components/Step5Response';
+import AdminPage from './components/AdminPage';
 
 /* ─── rate-limit: 3 ครั้ง / 10 นาที ─── */
 const RATE_KEY = 'rodnam_timestamps';
@@ -56,6 +57,7 @@ const blessings = [
 
 /* ─── main ─── */
 export default function App() {
+  const [route, setRoute] = useState(() => window.location.hash || '#/');
   const [step, setStep] = useState(1);
   const [selectedBowl, setSelectedBowl] = useState('');
   const [nickname, setNickname] = useState('');
@@ -63,7 +65,14 @@ export default function App() {
   const [pouring, setPouring] = useState(false);
   const [pastBlessings, setPastBlessings] = useState([]);
 
+  const isAdminRoute = route.startsWith('#/admin');
   const bowl = bowls.find((b) => b.id === selectedBowl);
+
+  useEffect(() => {
+    const handleHashChange = () => setRoute(window.location.hash || '#/');
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   /* ดึงข้อความอวยพรจาก Firebase */
   useEffect(() => {
@@ -95,6 +104,14 @@ export default function App() {
     setSelectedBlessing('');
     setPouring(false);
   }, []);
+
+  const goToCeremony = useCallback(() => {
+    window.location.hash = '#/';
+  }, []);
+
+  if (isAdminRoute) {
+    return <AdminPage onBackToCeremony={goToCeremony} />;
+  }
 
   return (
     <div className="min-h-dvh flex flex-col relative overflow-hidden">

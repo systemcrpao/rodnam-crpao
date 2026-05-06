@@ -53,3 +53,17 @@ export function subscribeBlessings(callback, maxItems = 50) {
     callback(items);
   });
 }
+
+/**
+ * Subscribe ข้อมูลคำอวยพรทั้งหมดสำหรับหน้า admin
+ */
+export function subscribeAllBlessings(callback) {
+  const q = query(blessingsCol, orderBy('createdAt', 'desc'));
+  return onSnapshot(q, (snapshot) => {
+    const items = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    callback(items);
+  });
+}
